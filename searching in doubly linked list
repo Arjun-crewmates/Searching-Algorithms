@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node prev, next;
+
+    public Node(int data) {
+        this.data = data;
+    }
+}
+
+class DoublyLinkedList {
+    Node head;
+
+    // Insert at end
+    void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null) temp = temp.next;
+        temp.next = newNode;
+        newNode.prev = temp;
+    }
+
+    // Search key
+    boolean search(int key) {
+        Node temp = head;
+        while (temp != null) {
+            if (temp.data == key) return true;
+            temp = temp.next;
+        }
+        return false;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        DoublyLinkedList dll = new DoublyLinkedList();
+
+        System.out.print("Enter number of elements: ");
+        int n = sc.nextInt();
+
+        System.out.println("Enter elements:");
+        for (int i = 0; i < n; i++) {
+            dll.insert(sc.nextInt());
+        }
+
+        System.out.print("Enter element to search: ");
+        int target = sc.nextInt();
+
+        if (dll.search(target))
+            System.out.println(target + " found in the list.");
+        else
+            System.out.println(target + " not found in the list.");
+
+        sc.close();
+    }
+}
